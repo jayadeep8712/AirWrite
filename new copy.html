@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SDG 14 - Life Below Water</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body{
+            color: white;
+        }
+
+        #ball {
+            width: 80px;
+            height: 80px;
+            background: radial-gradient(circle at 30% 30%, #87CEEB, #1E90FF);
+            border-radius: 50%;
+            position: fixed;
+            left: -100px;
+            top: 50%;
+            filter: drop-shadow(0 0 15px rgba(135, 206, 235, 0.8));
+            z-index: 1000;
+        }
+
+        .splash {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(180deg, #87CEEB, #1E90FF);
+            transform: scale(0);
+            transform-origin: center center;
+            z-index: 100;
+        }
+
+        .splash-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 150;
+        }
+
+        .splash-particle {
+            position: absolute;
+            background-color: rgba(135, 206, 235, 0.8);
+            border-radius: 50%;
+        }
+
+        .heading {
+            color: white;
+            font-size: 4.5rem;
+            text-align: center;
+            position: fixed;
+            width: 100%;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+            letter-spacing: 2px;
+        }
+
+        .sea-creatures {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 300;
+        }
+
+        .fish {
+            position: absolute;
+            width: 60px;
+            height: 40px;
+            filter: brightness(0.9) contrast(1.2);
+        }
+
+        .jellyfish {
+            position: absolute;
+            width: 100px;
+            height: 150px;
+            transition: all 0.5s ease;
+        }
+
+        .jellyfish .bell {
+            filter: url(#glow);
+        }
+
+        .jellyfish .tentacle {
+            transform-origin: top;
+        }
+
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0.2));
+            filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.3));
+        }
+
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            cursor: pointer;
+            filter: drop-shadow(0 0 5px rgba(255, 255, 255, 0.5));
+            z-index: 500;
+        }
+
+        .scroll-indicator svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+
+        .light-rays {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="ball"></div>
+    <div class="splash"></div>
+    <div class="splash-particles"></div>
+    <div class="light-rays"></div>
+    <h1 class="heading">SDG 14: Life Below Water</h1>
+     
+    
+    <div class="sea-creatures">
+        <!-- SVG Filters -->
+        <svg width="0" height="0">
+            <defs>
+                <filter id="glow">
+                    <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                    <feMerge>
+                        <feMergeNode in="coloredBlur"/>
+                        <feMergeNode in="SourceGraphic"/>
+                    </feMerge>
+                </filter>
+            </defs>
+        </svg>
+
+        <!-- Jellyfish template -->
+        <svg class="jellyfish" width="100" height="150" viewBox="0 0 100 150">
+            <!-- Bell -->
+            <path class="bell" d="M10 50C10 50 50 0 90 50C90 50 100 70 90 90C80 110 20 110 10 90C0 70 10 50 10 50Z" 
+                  fill="rgba(255, 255, 255, 0.9)" />
+            
+            <!-- Inner patterns -->
+            <path d="M30 50C30 50 50 30 70 50" stroke="rgba(255, 255, 255, 0.5)" fill="none" stroke-width="2"/>
+            <path d="M25 60C25 60 50 40 75 60" stroke="rgba(255, 255, 255, 0.5)" fill="none" stroke-width="2"/>
+            <path d="M20 70C20 70 50 50 80 70" stroke="rgba(255, 255, 255, 0.5)" fill="none" stroke-width="2"/>
+            
+            <!-- Tentacles -->
+            <path class="tentacle" d="M30 90C30 90 25 120 35 150" stroke="rgba(255, 255, 255, 0.8)" fill="none" stroke-width="3"/>
+            <path class="tentacle" d="M50 90C50 90 45 120 55 150" stroke="rgba(255, 255, 255, 0.8)" fill="none" stroke-width="3"/>
+            <path class="tentacle" d="M70 90C70 90 65 120 75 150" stroke="rgba(255, 255, 255, 0.8)" fill="none" stroke-width="3"/>
+        </svg>
+    </div>
+
+    <div class="scroll-indicator">
+        <svg viewBox="0 0 24 24">
+            <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+        </svg>
+    </div>
+
+    <script>
+        // Initial animation timeline
+        const tl = gsap.timeline();
+
+        // Create light rays
+        const createLightRays = () => {
+            const rays = document.querySelector('.light-rays');
+            for (let i = 0; i < 5; i++) {
+                const ray = document.createElement('div');
+                ray.style.position = 'absolute';
+                ray.style.top = '0';
+                ray.style.left = `${20 + i * 15}%`;
+                ray.style.width = '5px';
+                ray.style.height = '100%';
+                ray.style.background = 'linear-gradient(180deg, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0) 100%)';
+                ray.style.transform = `rotate(${-20 + i * 10}deg)`;
+                rays.appendChild(ray);
+            }
+        };
+
+
+        // Create splash particles effect
+        const createSplashParticles = () => {
+            const particlesContainer = document.querySelector('.splash-particles');
+            const numParticles = 50;
+
+            for (let i = 0; i < numParticles; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('splash-particle');
+
+                const size = 5 + Math.random() * 20;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+
+                particlesContainer.appendChild(particle);
+
+                gsap.set(particle, {
+                    x: window.innerWidth / 2,
+                    y: window.innerHeight / 2,
+                    opacity: 1
+                });
+
+                gsap.to(particle, {
+                    x: `+=${-300 + Math.random() * 600}`,
+                    y: `+=${-300 + Math.random() * 600}`,
+                    opacity: 0,
+                    duration: 1.5 + Math.random(),
+                    ease: "power2.out"
+                });
+            }
+        };
+
+        // Create bubbles
+        const createBubbles = () => {
+            const container = document.querySelector('.sea-creatures');
+            for (let i = 0; i < 20; i++) {
+                const bubble = document.createElement('div');
+                bubble.className = 'bubble';
+                const size = 5 + Math.random() * 20;
+                bubble.style.width = `${size}px`;
+                bubble.style.height = `${size}px`;
+                container.appendChild(bubble);
+
+                gsap.set(bubble, {
+                    x: Math.random() * window.innerWidth,
+                    y: window.innerHeight + 100
+                });
+
+                gsap.to(bubble, {
+                    y: -100,
+                    x: `+=${-50 + Math.random() * 100}`,
+                    duration: 10 + Math.random() * 20,
+                    ease: "power1.inOut",
+                    repeat: -1,
+                    delay: Math.random() * 5
+                });
+            }
+        };
+
+        // Create and animate sea creatures
+        const createSeaCreatures = () => {
+            const container = document.querySelector('.sea-creatures');
+            
+            // Animate fish
+            for (let i = 0; i < 8; i++) {
+                const fish = document.createElement('img');
+                fish.className = 'fish';
+                fish.src = 'https://staging.svgrepo.com/show/18529/fish.svg';   
+                container.appendChild(fish);
+                
+                gsap.set(fish, {
+                    x: -150,
+                    y: 100 + Math.random() * (window.innerHeight - 200),
+                    scale: 0.5 + Math.random() * 1,
+                    rotation: Math.random() * 20 - 10
+                });
+
+                // Complex swimming motion
+                gsap.to(fish, {
+                    x: window.innerWidth + 150,
+                    duration: 15 + Math.random() * 10,
+                    ease: "none",
+                    repeat: -1,
+                    delay: Math.random() * 5,
+                    modifiers: {
+                        y: `+=${Math.sin(Date.now()) * 50}`
+                    }
+                });
+
+                // Subtle rotation animation
+                gsap.to(fish, {
+                    rotation: "+=15",
+                    duration: 2,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+            }
+
+            // Animate jellyfish
+            for (let i = 0; i < 5; i++) {
+                const jellyfish = document.querySelector('.jellyfish').cloneNode(true);
+                container.appendChild(jellyfish);
+                
+                gsap.set(jellyfish, {
+                    x: 100 + Math.random() * (window.innerWidth - 200),
+                    y: window.innerHeight + 100,
+                    scale: 0.6 + Math.random() * 0.8
+                });
+
+                // Floating motion
+                gsap.to(jellyfish, {
+                    y: -180,
+                    duration: 25 + Math.random() * 15,
+                    ease: "power1.inOut",
+                    repeat: -1,
+                    delay: Math.random() * 5
+                });
+
+                // Sideways drift
+                gsap.to(jellyfish, {
+                    x: "+=50",
+                    duration: 5,
+                    ease: "sine.inOut",
+                    repeat: -1,
+                    yoyo: true
+                });
+
+                // Bell pulsing animation
+                gsap.to(jellyfish.querySelector('.bell'), {
+                    scale: 0.9,
+                    duration: 1.5,
+                    repeat: -1,
+                    yoyo: true,
+                    ease: "sine.inOut"
+                });
+
+                // Tentacle movement
+                jellyfish.querySelectorAll('.tentacle').forEach((tentacle, index) => {
+                    gsap.to(tentacle, {
+                        scaleY: 0.7 + Math.random() * 0.3,
+                        duration: 1 + Math.random(),
+                        repeat: -1,
+                        yoyo: true,
+                        ease: "sine.inOut",
+                        delay: index * 0.2
+                    });
+                });
+            }
+        };
+
+        // Main animation sequence
+        tl.to("#ball", {
+            duration: 2,
+            left: "50%",
+            xPercent: -50,
+            ease: "power2.inOut",
+            rotation: 720
+        })
+        .to("#ball", {
+            duration: 0.7,
+            scale: 2,
+            ease: "power2.in"
+        })
+        .to(".splash", {
+            duration: 1.5,
+            scale: 20,
+            ease: "power2.inOut",
+            onStart: createSplashParticles
+        })
+        .to("#ball", {
+            duration: 0.1,
+            opacity: 0
+        }, "-=0.8")
+        .to(".light-rays", {
+            duration: 2,
+            opacity: 0.5,
+            ease: "power2.out"
+        })
+        .to(".heading", {
+            duration: 1.5,
+            opacity: 1,
+            y: 0,
+            ease: "elastic.out(1, 0.8)"
+        })
+        .to(".scroll-indicator", {
+            duration: 1,
+            opacity: 1,
+            ease: "power2.out"
+        });
+
+        // Initialize effects
+        createLightRays();
+        createBubbles();
+        tl.call(createSeaCreatures);
+
+        // Scroll indicator animation
+        gsap.to(".scroll-indicator", {
+            y: "15px",
+            duration: 1.5,
+            repeat: -1,
+            yoyo: true,
+            ease: "sine.inOut"
+        });
+
+        // Smooth scroll on arrow click
+        document.querySelector('.scroll-indicator').addEventListener('click', () => {
+            window.scrollTo({
+                top: window.innerHeight,
+                behavior: 'smooth'
+            });
+        });
+    </script>
+</body>
+</html>
