@@ -173,7 +173,7 @@
 
 
 
-.carousel-container {
+/* .carousel-container {
     width: 100%;
     height: 100vh;
     position: relative;
@@ -350,4 +350,158 @@
     0% { transform: translateY(100vh) scale(0); opacity: 0; }
     50% { opacity: 0.8; }
     100% { transform: translateY(-100px) scale(1); opacity: 0; }
-} 
+}  */
+
+
+
+
+
+
+
+/* new below old above */
+
+.carousel-container {
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    background: linear-gradient(45deg, #001a33, #004080);
+    overflow: hidden;
+    perspective: 1000px;
+}
+
+.ocean-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at 50% 50%, transparent 0%, rgba(0,26,51,0.8) 100%);
+    opacity: 0.2;
+    animation: wave 20s infinite linear;
+}
+
+.carousel {
+    display: flex;
+    gap: 40px;
+    padding: 40px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.target-card {
+    min-width: 380px;
+    height: 500px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    flex-shrink: 0;
+}
+
+.card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 30px;
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.card-image {
+    height: 220px;
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.wave-decoration {
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23ffffff' fill-opacity='0.1' d='M0,32L48,37.3C96,43,192,53,288,80C384,107,480,149,576,154.7C672,160,768,128,864,112C960,96,1056,96,1152,106.7C1248,117,1344,139,1392,149.3L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z'%3E%3C/path%3E%3C/svg%3E");
+    background-size: cover;
+    z-index: 1;
+}
+
+.card-content {
+    padding: 30px;
+    color: white;
+}
+
+.target-number {
+    font-size: 18px;
+    color: #64ffda;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 15px;
+}
+
+.target-title {
+    font-size: 26px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    background: linear-gradient(45deg, #64ffda, #48d1cc);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.target-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.card-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    padding: 20px 30px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aqua-animal {
+    position: fixed;
+    width: 100px;
+    height: 100px;
+    pointer-events: none;
+    z-index: 1000;
+    transition: transform 0.1s ease-out;
+    opacity: 0;
+}
+
+.aqua-animal img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.sbubble {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    animation: float 8s infinite;
+}
+
+@keyframes float {
+    0% { transform: translateY(100vh) scale(0); opacity: 0; }
+    50% { opacity: 0.8; }
+    100% { transform: translateY(-100px) scale(1); opacity: 0; }
+}
+
+@keyframes wave {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
+}
