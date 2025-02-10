@@ -95,10 +95,6 @@ animate();
 //   }
 // });
 
-
-
-
-
 //// ------------------------------Gallary----------------------------
 // Title animation
 gsap.to(".gallery-title", {
@@ -181,4 +177,50 @@ document.querySelectorAll(".gallery-item").forEach((item, index) => {
       duration: 0.5,
     });
   });
+});
+
+// Custom cursor
+const cursor = document.querySelector(".cursor");
+const cursorFollow = document.querySelector(".cursor-follow");
+
+document.addEventListener("mousemove", (e) => {
+  const rotationY = e.movementX > 0 ? 180 : 0;
+
+  gsap.to(cursor, {
+    x: e.clientX - 5,
+    y: e.clientY - 5,
+    rotationY: rotationY, // Flip the image
+    duration: 0.1,
+    ease: "power2.out"
+  });
+
+  gsap.to(cursorFollow, {
+    x: e.clientX - 25,
+    y: e.clientY - 25,
+    rotationY: rotationY, // Flip the image
+    duration: 0.3,
+    ease: "power2.out"
+  });
+});
+
+
+
+
+
+
+
+document.querySelector('.toggle-arrow').addEventListener('click', function() {
+  const card = document.querySelector('.profile-card');
+  card.classList.toggle('active');
+  this.style.transform = card.classList.contains('active') ? 
+      'translateY(-50%) rotate(180deg)' : 'translateY(-50%)';
+});
+
+document.addEventListener('click', function(e) {
+  const card = document.querySelector('.profile-card');
+  const arrow = document.querySelector('.toggle-arrow');
+  if (!card.contains(e.target) && !arrow.contains(e.target) && card.classList.contains('active')) {
+      card.classList.remove('active');
+      arrow.style.transform = 'translateY(-50%)';
+  }
 });

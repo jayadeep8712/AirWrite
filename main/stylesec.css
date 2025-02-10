@@ -505,3 +505,221 @@
     50% { transform: translateY(-20px); }
     100% { transform: translateY(0); }
 }
+
+
+.cursor {
+    width: 100px;
+    height: 20px;
+    background: url(https://icons.iconarchive.com/icons/iconarchive/fish-illustration/512/Blue-2-Curious-Fish-icon.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    /* rotate: -20deg; */
+    /* box-shadow: 0 0 20px #004080; */
+    /* mix-blend-mode: difference; */
+  }
+
+  .cursor-follow {
+    width: 100px;
+    height: 60px;
+    /* border: 2px solid #001a33; */
+    background: url(https://i.pinimg.com/originals/62/45/cb/6245cb549cbdb7cf4b659cae141b207b.gif);
+    background-size: contain;
+    background-repeat: no-repeat;
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: 0.1s;
+    /* mix-blend-mode: difference; */
+  }
+
+
+
+
+
+
+
+
+ 
+  /* Aesthetic Footer style */
+  :root {
+    --primary: #00d0ff;
+    --secondary: #2193b0;
+    --accent: #0080ff;
+  }
+  
+  .footer {
+    background: linear-gradient(to bottom, transparent, #05606e),
+                url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100' height='100' viewBox='0 0 100 100'%3E%3Crect x='0' y='0' width='100' height='100' fill='%23000' /%3E%3Cpath d='M0 0h100v100H0V0zm50 50c0-5 2-10 5-13 3-4 8-6 13-6s10 2 13 5c4 3 6 8 6 13s-2 10-5 13c-3 4-8 6-13 6s-10-2-13-5c-4-3-6-8-6-13z' fill='%23ffffff' fill-opacity='0.05'/%3E%3C/svg%3E");
+    position: relative;
+    padding: 8rem 2rem 2rem;
+    margin-top: 4rem;
+    z-index: 450;
+  }
+
+  .footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom right, var(--primary), var(--secondary));
+    clip-path: polygon(0 0, 100% 0, 100% 60%, 0 100%);
+    opacity: 0.1;
+  }
+
+  .footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 4rem;
+    position: relative;
+  }
+
+  .footer-section {
+    position: relative;
+  }
+
+  .footer-section h3 {
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .footer-text {
+    line-height: 1.8;
+    color: #a0aec0;
+    margin-bottom: 2rem;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+  }
+
+  .social-link {
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--primary);
+    text-decoration: none;
+    transition: 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .social-link::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    opacity: 0;
+    transition: 0.3s;
+  }
+
+  .social-link:hover::before {
+    opacity: 1;
+  }
+
+  .social-link span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+
+  .footer-link {
+    color: #a0aec0;
+    text-decoration: none;
+    transition: 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+
+  .footer-link::before {
+    content: '→';
+    color: var(--primary);
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: 0.3s;
+  }
+
+  .footer-link:hover {
+    color: white;
+    transform: translateX(10px);
+  }
+
+  .footer-link:hover::before {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .newsletter-form {
+    position: relative;
+    margin-top: 2rem;
+  }
+
+  .newsletter-input {
+    width: 100%;
+    padding: 1rem 1.5rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 30px;
+    color: white;
+    font-size: 1rem;
+  }
+
+  .newsletter-button {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    border: none;
+    border-radius: 25px;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  .newsletter-button:hover {
+    transform: scale(1.05);
+  }
+
+  .footer-bottom {
+    text-align: center;
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    color: #a0aec0;
+  }
+
+  /* Floating Elements */
+  .floating-element {
+    position: absolute;
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.1;
+    pointer-events: none;
+  }
