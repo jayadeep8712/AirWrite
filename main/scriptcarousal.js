@@ -179,6 +179,7 @@ document.querySelectorAll(".gallery-item").forEach((item, index) => {
   });
 });
 
+
 // Custom cursor
 const cursor = document.querySelector(".cursor");
 const cursorFollow = document.querySelector(".cursor-follow");
