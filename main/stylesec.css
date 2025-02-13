@@ -541,7 +541,7 @@
 /* Footer style */
 .footer {
   z-index: 1;
-  --footer-background: #00a2e7;
+  --footer-background: #1e90ff;  
   display: grid;
   position: relative;
   grid-area: footer;
