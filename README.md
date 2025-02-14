@@ -1,3 +1,3 @@
 # SDG-14
 
-![["main\img\SDG14.png"]]
+![[\img\SDG14.png]]
